@@ -1,24 +1,37 @@
 ##框架名称：
+
 > XYWeChat
 
 ##框架简介：
-`XYWeChat` 是一款为便捷开发微信工程平台而产生的 `PHP` 类库，其目的是为方便开发微信公众平台，类库已支持绝大多数微信开发的接口。后期会随着微信官方的更新而做出相应的更新。
+
+`XYWeChat` 是一款为便捷开发微信公众平台而产生的 `PHP` 类库，其目的是为方便开发微信公众平台，类库已支持绝大多数微信开发的接口。后期会随着微信官方的更新而做出相应的更新。
+
 
 ##开发语言：
+
 > PHP
 
+
 ##版本要求：
+
 > PHP > 5.3
+
 
 ##相关链接
 
 公众平台首页：https://mp.weixin.qq.com/
+
 公众平台文档：http://mp.weixin.qq.com/wiki/home/index.html
+
 测试申请地址：http://mp.weixin.qq.com/debug/cgi-bin/sandbox?t=sandbox/login
 
+
 ##联系方式
+
 邮箱：dingdayu (85897970@qq.com)
+
 博客：http://blog.dingxiaoyu.com
+
 
 ------------
 
