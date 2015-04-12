@@ -24,11 +24,15 @@ class MsgConstant{
     //-------远程调用相关--1201到1300------
     const ERROR_REMOTE_SERVER_NOT_RESPOND = 1201; //远程服务器未响应
     const ERROR_GET_ACCESS_TOKEN = 1202; //获取ACCESS_TOKEN失败
+	const ERROR_GET_ALLBACKIP = 1203; //'获取微信服务器IP地址失败   AppID无效错误
 
     //-------文章管理相关--1301到1400------
 
     //-------分类管理相关--1401到1500------
     const ERROR_MENU_NOT_EXISTS = 1401; //菜单不存在
+	
+	//-------全局返回码相关-4000到6000------
+
 
     //-------文案类-----------------------
     const ERROR_NO_BINDING_TEXT = '对不起，您尚未绑定微信，轻松绑定微信，即可查询实时流量，享受便捷服务!'; //未绑定微信时错误文案

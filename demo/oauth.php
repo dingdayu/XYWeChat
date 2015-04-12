@@ -1,23 +1,23 @@
 <?php
 
-include 'XYWeChat.php';
+include './../XYWeChat.php';
 
 /**
- * ÍøÒ³ÊÚÈ¨
+ * ç½‘é¡µæŽˆæƒ
  */
 /**
- * Description: »ñÈ¡CODE
- * @param $scope snsapi_base²»µ¯³öÊÚÈ¨Ò³Ãæ£¬Ö»ÄÜ»ñµÃOpenId;snsapi_userinfoµ¯³öÊÚÈ¨Ò³Ãæ£¬¿ÉÒÔ»ñµÃËùÓÐÐÅÏ¢
- * ½«»áÌø×ªµ½redirect_uri/?code=CODE&state=STATE Í¨¹ýGET·½Ê½»ñÈ¡codeºÍstate
+ * Description: èŽ·å–CODE
+ * @param $scope snsapi_baseä¸å¼¹å‡ºæŽˆæƒé¡µé¢ï¼Œåªèƒ½èŽ·å¾—OpenId;snsapi_userinfoå¼¹å‡ºæŽˆæƒé¡µé¢ï¼Œå¯ä»¥èŽ·å¾—æ‰€æœ‰ä¿¡æ¯
+ * å°†ä¼šè·³è½¬åˆ°redirect_uri/?code=CODE&state=STATE é€šè¿‡GETæ–¹å¼èŽ·å–codeå’Œstate
  */
 $redirect_uri = 'http://www.xyser.com/XYWeChat/oauth.php';
 $code = \XYWeChat\WeChatOAuth::getCode($redirect_uri, $state=1, $scope='snsapi_userinfo');
 /**
- * Description: Í¨¹ýcode»»È¡ÍøÒ³ÊÚÈ¨access_token
- * Ê×ÏÈÇë×¢Òâ£¬ÕâÀïÍ¨¹ýcode»»È¡µÄÍøÒ³ÊÚÈ¨access_token,Óë»ù´¡Ö§³ÖÖÐµÄaccess_token²»Í¬¡£
- * ¹«ÖÚºÅ¿ÉÍ¨¹ýÏÂÊö½Ó¿ÚÀ´»ñÈ¡ÍøÒ³ÊÚÈ¨access_token¡£
- * Èç¹ûÍøÒ³ÊÚÈ¨µÄ×÷ÓÃÓòÎªsnsapi_base£¬Ôò±¾²½ÖèÖÐ»ñÈ¡µ½ÍøÒ³ÊÚÈ¨access_tokenµÄÍ¬Ê±£¬Ò²»ñÈ¡µ½ÁËopenid£¬snsapi_baseÊ½µÄÍøÒ³ÊÚÈ¨Á÷³Ì¼´µ½´ËÎªÖ¹¡£
- * @param $code getCode()»ñÈ¡µÄcode²ÎÊý
+ * Description: é€šè¿‡codeæ¢å–ç½‘é¡µæŽˆæƒaccess_token
+ * é¦–å…ˆè¯·æ³¨æ„ï¼Œè¿™é‡Œé€šè¿‡codeæ¢å–çš„ç½‘é¡µæŽˆæƒaccess_token,ä¸ŽåŸºç¡€æ”¯æŒä¸­çš„access_tokenä¸åŒã€‚
+ * å…¬ä¼—å·å¯é€šè¿‡ä¸‹è¿°æŽ¥å£æ¥èŽ·å–ç½‘é¡µæŽˆæƒaccess_tokenã€‚
+ * å¦‚æžœç½‘é¡µæŽˆæƒçš„ä½œç”¨åŸŸä¸ºsnsapi_baseï¼Œåˆ™æœ¬æ­¥éª¤ä¸­èŽ·å–åˆ°ç½‘é¡µæŽˆæƒaccess_tokençš„åŒæ—¶ï¼Œä¹ŸèŽ·å–åˆ°äº†openidï¼Œsnsapi_baseå¼çš„ç½‘é¡µæŽˆæƒæµç¨‹å³åˆ°æ­¤ä¸ºæ­¢ã€‚
+ * @param $code getCode()èŽ·å–çš„codeå‚æ•°
  */
 $code = $_GET['code'];
 $access_token = \XYWeChat\WeChatOAuth::getAccessTokenAndOpenId($code);

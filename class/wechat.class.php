@@ -26,10 +26,13 @@ class Wechat{
      * @param string $token 验证信息
      * @param boolean $debug 调试模式，默认为关闭
      */
-    public function __construct($token, $debug = FALSE) {
+    public function __construct( $debug = FALSE) {
+		$token = WECHAT_TOKEN;
         //未通过消息真假性验证
-       if ($this->isValid() && $this->validateSignature($token)) {
-            return $_GET['echostr'];
+        if ($this->isValid() && $this->validateSignature($token)) {
+            //return $_GET['echostr'];
+			echo $_GET['echostr'];
+			exit;
         }
         //是否打印错误报告
         $this->debug = $debug;
@@ -80,30 +83,12 @@ class Wechat{
 
     /**
      * 分析消息类型，并分发给对应的函数
+     * @param  string $request 参数名，默认为无参
      * @return void
      */
-    public function run() {
+    public function run($request = false) {
+		if($request) return $this->request;
         return WechatRequest::switchType($this->request);
-    }
-
-    public function checkSignature()
-    {
-        $signature = $_GET["signature"];
-        $timestamp = $_GET["timestamp"];
-        $nonce = $_GET["nonce"];
-
-        $token = WECHAT_TOKEN;
-        $tmpArr = array($token, $timestamp, $nonce);
-        sort($tmpArr, SORT_STRING);
-        $tmpStr = implode( $tmpArr );
-        $tmpStr = sha1( $tmpStr );
-
-        if( $tmpStr == $signature ){
-            echo $_GET['echostr'];
-            return true;
-        }else{
-            return false;
-        }
     }
 }
 

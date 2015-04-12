@@ -14,7 +14,6 @@ class Autoloader{
      * 向PHP注册在自动载入函数
      */
     public static function register(){
-
         spl_autoload_register(array(new self, 'autoload'));
     }
 

@@ -1,5 +1,5 @@
 <?php
-include 'XYWeChat.php';
+include './../XYWeChat.php';
 /**
  * 主动给用户发送信息
  */

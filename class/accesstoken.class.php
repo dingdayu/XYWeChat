@@ -10,6 +10,7 @@ namespace XYWeChat;
 class AccessToken{
     /**
      * 获取微信Access_Token
+     * @return access_token
      */
     public static function getAccessToken(){
         //检测本地是否已经拥有access_token，并且检测access_token是否过期
@@ -51,7 +52,7 @@ class AccessToken{
      */
     private static function _checkAccessToken(){
         //获取access_token。是上面的获取方法获取到后存起来的。
-//        $accessToken = YourDatabase::get('access_token');
+		//$accessToken = YourDatabase::get('access_token');
         $data = file_get_contents('access_token');
         $accessToken['value'] = $data;
         if(!empty($accessToken['value'])){
@@ -61,6 +62,20 @@ class AccessToken{
             }
         }
         return false;
+    }
+	
+    /**
+     * @descrpition 获取微信服务器IP地址
+     * @return Array	
+     */
+    private static function getAllBackIP(){
+        $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".self::getAccessToken();
+        $accessToken = Curl::callWebServer($url, '', 'GET');
+        if(!isset($accessToken['ip_list'])){
+            return Msg::returnErrMsg(MsgConstant::ERROR_GET_ALLBACKIP, '获取微信服务器IP地址失败');
+        }
+
+        return $accessToken['ip_list'];
     }
 }
 ?>
