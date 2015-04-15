@@ -41,3 +41,4 @@
  - [新增] `XYWeChat\ShakeAround\Page` 添加 新增页面 `addPage()`， 编辑页面信息 `updatePage()`， 查询页面列表 `getPageList()`， 查询指定页面 `getPageInfo()`， 删除页面 `deletePage()` 等方法
  - [新增] `XYWeChat\ShakeAround` 添加 摇一摇页面素材管理类`Material`(material.class.php)
  - [新增] `XYWeChat\ShakeAround\Material` 添加 上传图片 `upload()`方法
+ - [新增] `XYWeChat\ShakeAround\Page` 添加 设备与页面的关联方法 `bindPage()`

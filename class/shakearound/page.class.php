@@ -144,4 +144,38 @@ class Page{
 		);
         return Curl::callWebServer($queryUrl, $data, 'POST');
     }
+	
+		
+	/**
+     * 配置设备与页面的关联关系
+	 * 配置设备与页面的关联关系。支持建立或解除关联关系，也支持新增页面或覆盖页面等操作。配置完成后，在此设备的信号范围内，即可摇出关联的页面信息。若设备配置多个页面，则随机出现页面信息。
+	 *
+     * @param $device_id 设备ID 
+	 * @param $info array('1223','1223') 页面id数组
+     * @param $bind 关联操作标志位， 0为解除关联关系，1为建立关联关系
+     * @param $append 新增操作标志位， 0为覆盖，1为新增
+	 * @param $info array('UUID'=>'FDA50693-A4E2-4FB1-AFCF-C6EB07647825','minor '=>'1002','major'=>'1223')
+	 *
+     * @return array('data'=>array(),'errcode'=>0,'errmsg'=>'success');
+     */
+    public static function bindPage($device_id ,$page_ids = '', $bind = 1 ,$append = 0 ,$$info = ''){
+        //获取ACCESS_TOKEN
+        $accessToken = AccessToken::getAccessToken();
+        $queryUrl = 'https://api.weixin.qq.com/shakearound/device/bindpage?access_token='.$accessToken;
+		if(empty($device_id) and $info == ''){
+			return false;
+		}
+        $data = json_encode(array(
+			'device_identifier'=>array(
+				'device_id'=>$device_id,
+				'UUID'=>$info['UUID'],
+				'minor '=>$info['minor'],
+				'major'=>$info['major']
+			), 
+			'page_ids'=> $page_ids,
+			'bind'=> $bind,
+			'append'=> $append,
+		);
+        return Curl::callWebServer($queryUrl, $data, 'POST');
+    }
 }

@@ -66,7 +66,7 @@ class Device{
      * @param $device_id 设备ID 
 	 * @param $info array('UUID'=>'FDA50693-A4E2-4FB1-AFCF-C6EB07647825','minor '=>'1002','major'=>'1223')
 	 *
-     * @return array('data'=>array('data'=>array(),"errcode"=> 0,'errmsg'=>'success');
+     * @return array('data'=>array(),"errcode"=> 0,'errmsg'=>'success');
      */
     public static function bindLocation($poi_id ,$device_id ,$info = '' ){
         //获取ACCESS_TOKEN
