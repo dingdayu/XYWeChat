@@ -42,3 +42,6 @@
  - [新增] `XYWeChat\ShakeAround` 添加 摇一摇页面素材管理类`Material`(material.class.php)
  - [新增] `XYWeChat\ShakeAround\Material` 添加 上传图片 `upload()`方法
  - [新增] `XYWeChat\ShakeAround\Page` 添加 设备与页面的关联方法 `bindPage()`
+ - [修正] 修正 `XYWeChat\ShakeAround\Material` 类 `upload()` 方法的参列
+ - [新增] `XYWeChat\ShakeAround` 添加 摇一摇用户类 `User`(user.class.php)
+ - [新增] `XYWeChat\ShakeAround\User` 添加 获取摇周边的设备及用户信息 `getShakeInfo()`

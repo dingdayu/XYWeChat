@@ -17,7 +17,7 @@ class Material{
      * 
      * @return array("data"=>array("pic_url"=>"http://shp.qpic.cn/wechat_shakearound_pic/0/1428377032e9dd2797018cad79186e03e8c5aec8dc/120"), "errcode"=> 0,"errmsg"=> "success.")
      */
-    public static function upload($filename, $type){
+    public static function upload($filename){
         //获取ACCESS_TOKEN
         $accessToken = AccessToken::getAccessToken();
         $queryUrl = 'https://api.weixin.qq.com/shakearound/material/add?access_token='.$accessToken;
