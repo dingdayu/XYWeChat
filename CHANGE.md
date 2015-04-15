@@ -39,3 +39,5 @@
  - [新增] `XYWeChat\ShakeAround` 添加 设备管理类`Device`(page.class.php)，页面管理类`Page`(page.class.php)
  - [新增] `XYWeChat\ShakeAround\Device` 添加 申请设备ID `applyDevice()`， 编辑设备信息 `updateDevice()`， 配置设备与门店的关联关系 `bindLocation()`， 获取所有设备列表 `getDeviceList()`， 查询指定设备 `getDeviceInfo()` 等方法
  - [新增] `XYWeChat\ShakeAround\Page` 添加 新增页面 `addPage()`， 编辑页面信息 `updatePage()`， 查询页面列表 `getPageList()`， 查询指定页面 `getPageInfo()`， 删除页面 `deletePage()` 等方法
+ - [新增] `XYWeChat\ShakeAround` 添加 摇一摇页面素材管理类`Material`(material.class.php)
+ - [新增] `XYWeChat\ShakeAround\Material` 添加 上传图片 `upload()`方法
