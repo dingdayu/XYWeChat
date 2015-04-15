@@ -30,8 +30,8 @@
  - [清除] `XYWeChat/Wechat` 类 清除 `checkSignature()` 遗留方法；
  - [改进] 自动化配置接口时的确认事件
 
-####v1.0.1
->未发布
+####v1.0.2
+>2015年4月15日18:01:47
 
  - [新增方法] `XYWeChat/Menu` 添加 `getMenuAllInfo()` 获取自定义菜单（本接口无论公众号的接口是如何设置的，都能查询到接口）
  - [新增类] `XYWeChat/GetCurrent` 添加 常用获取类(getcurrent.class.php)，添加 `getAutoreply()` 方法用于获取 `获取自动回复规则`
