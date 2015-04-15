@@ -34,4 +34,8 @@
 >未发布
 
  - [新增] `XYWeChat/Menu` 添加 `getMenuAllInfo()` 获取自定义菜单（本接口无论公众号的接口是如何设置的，都能查询到接口）
- - [新增] 添加 `XYWeChat/GetCurrent` 常用获取类（getcurrent.class.php），添加 `getAutoreply()` 方法用于获取 `获取自动回复规则`
+ - [新增] `XYWeChat/GetCurrent` 添加 常用获取类(getcurrent.class.php)，添加 `getAutoreply()` 方法用于获取 `获取自动回复规则`
+ - [新增] 新增`XYWeChat\ShakeAround` 模块，用来管理 `摇一摇周边`
+ - [新增] `XYWeChat\ShakeAround` 添加 设备管理类`Device`(page.class.php)，页面管理类`Page`(page.class.php)
+ - [新增] `XYWeChat\ShakeAround\Device` 添加 申请设备ID `applyDevice()`， 编辑设备信息 `updateDevice()`， 配置设备与门店的关联关系 `bindLocation()`， 获取所有设备列表 `getDeviceList()`， 查询指定设备 `getDeviceInfo()` 等方法
+ - [新增] `XYWeChat\ShakeAround\Page` 添加 新增页面 `addPage()`， 编辑页面信息 `updatePage()`， 查询页面列表 `getPageList()`， 查询指定页面 `getPageInfo()`， 删除页面 `deletePage()` 等方法

@@ -4,7 +4,7 @@ namespace XYWeChat;
  * 常用获取类
  *
  * @Author: dingdayu (85897970@qq.com)
- * @Time: 2015年4月11日14:46:37
+ * @Time: 2015年4月15日12:26:14
  * @Blog: http://blog.dingxiaoyu.com
  */
 class GetCurrent{
