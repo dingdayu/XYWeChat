@@ -142,7 +142,7 @@ $fansList = \XYWeChat\UserManage::getFansList();
 //上传图片
 $menuId = \XYWeChat\Media::upload('/var/www/baidu_jgylogo3.jpg', 'image');
 if (empty($menuId['media_id'])) {
-    die('error');
+    exit('error');
 }
 //上传图文消息
 $list = array();
