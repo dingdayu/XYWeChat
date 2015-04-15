@@ -29,3 +29,8 @@
  - [新增] `XYWeChat/Wechat` 添加 `run`方法 新增 `$request` 参数 当为`true`时直接返回解析后的数组；
  - [清除] `XYWeChat/Wechat` 类 清除 `checkSignature()` 遗留方法；
  - [改进] 自动化配置接口时的确认事件
+
+####v1.0.1
+>未发布
+
+ - [新增] `XYWeChat/Menu` 添加 `getMenuAllInfo()` 获取自定义菜单（本接口无论公众号的接口是如何设置的，都能查询到接口）
