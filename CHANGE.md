@@ -34,3 +34,4 @@
 >未发布
 
  - [新增] `XYWeChat/Menu` 添加 `getMenuAllInfo()` 获取自定义菜单（本接口无论公众号的接口是如何设置的，都能查询到接口）
+ - [新增] 添加 `XYWeChat/GetCurrent` 常用获取类（getcurrent.class.php），添加 `getAutoreply()` 方法用于获取 `获取自动回复规则`
