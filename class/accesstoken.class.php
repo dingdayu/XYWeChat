@@ -21,6 +21,21 @@ class AccessToken{
         return $accessToken['access_token'];
     }
 
+	
+    /**
+     * @descrpition 获取微信服务器IP地址
+     * @return Array	
+     */
+    private static function getAllBackIP(){
+        $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".self::getAccessToken();
+        $accessToken = Curl::callWebServer($url, '', 'GET');
+        if(!isset($accessToken['ip_list'])){
+            return Msg::returnErrMsg(MsgConstant::ERROR_GET_ALLBACKIP, '获取微信服务器IP地址失败');
+        }
+
+        return $accessToken['ip_list'];
+    }
+
     /**
      * @descrpition 从微信服务器获取微信ACCESS_TOKEN
      * @return Ambigous|bool
@@ -63,19 +78,6 @@ class AccessToken{
         }
         return false;
     }
-	
-    /**
-     * @descrpition 获取微信服务器IP地址
-     * @return Array	
-     */
-    private static function getAllBackIP(){
-        $url = "https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token=".self::getAccessToken();
-        $accessToken = Curl::callWebServer($url, '', 'GET');
-        if(!isset($accessToken['ip_list'])){
-            return Msg::returnErrMsg(MsgConstant::ERROR_GET_ALLBACKIP, '获取微信服务器IP地址失败');
-        }
 
-        return $accessToken['ip_list'];
-    }
 }
 ?>
