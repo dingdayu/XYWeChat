@@ -41,83 +41,88 @@ class AdvancedBroadcast{
     /**
      * 根据分组进行群发 - 发送图文消息
      *
-     * @param $groupId 要发送的分组ID
-     * @param $mediaId 必须通过self::uploadNews获得的多媒体资源ID
+     * @param $groupId Int 要发送的分组ID
+     * @param $mediaId String 必须通过self::uploadNews获得的多媒体资源ID
+     * @param $isToAll Bool 使用is_to_all为true且成功群发，会使得此次群发进入历史消息列表。
      * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
      */
-    public static function sentNewsByGroup($groupId, $mediaId){
+    public static function sentNewsByGroup($groupId, $mediaId, $isToAll=false){
         $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token='.AccessToken::getAccessToken();
         $queryAction = 'POST';
         $template = array();
         $template['filter']['group_id'] = $groupId;
+        $template['filter']['is_to_all'] = $isToAll;
         $template['mpnews']['media_id'] = $mediaId;
         $template['msgtype'] = 'mpnews';
         $template = json_encode($template);
         return Curl::callWebServer($queryUrl, $template, $queryAction);
     }
-
     /**
      * 根据分组进行群发 - 发送文本消息
      *
      * @param $groupId 要发送的分组ID
      * @param $content 文本消息的内容
+     * @param $isToAll Bool 使用is_to_all为true且成功群发，会使得此次群发进入历史消息列表。
      * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
      */
-    public static function sentTextByGroup($groupId, $content){
+    public static function sentTextByGroup($groupId, $content, $isToAll=false){
         $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token='.AccessToken::getAccessToken();
         $queryAction = 'POST';
         $template = array();
         $template['filter']['group_id'] = $groupId;
+        $template['filter']['is_to_all'] = $isToAll;
         $template['text']['content'] = $content;
         $template['msgtype'] = 'text';
         $template = json_encode($template);
         return Curl::callWebServer($queryUrl, $template, $queryAction);
     }
-
     /**
      * 根据分组进行群发 - 发送语音消息
      *
      * @param $groupId 要发送的分组ID
      * @param $mediaId 需通过基础支持中的上传下载多媒体文件来得到。Media::upload()中返回的media_id字段的值
+     * @param $isToAll Bool 使用is_to_all为true且成功群发，会使得此次群发进入历史消息列表。
      * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
      */
-    public static function sentVoiceByGroup($groupId, $mediaId){
+    public static function sentVoiceByGroup($groupId, $mediaId, $isToAll=false){
         $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token='.AccessToken::getAccessToken();
         $queryAction = 'POST';
         $template = array();
         $template['filter']['group_id'] = $groupId;
+        $template['filter']['is_to_all'] = $isToAll;
         $template['voice']['media_id'] = $mediaId;
         $template['msgtype'] = 'voice';
         $template = json_encode($template);
         return Curl::callWebServer($queryUrl, $template, $queryAction);
     }
-
     /**
      * 根据分组进行群发 - 发送图片消息
      *
      * @param $groupId 要发送的分组ID
      * @param $mediaId 需通过基础支持中的上传下载多媒体文件来得到。Media::upload()中返回的media_id字段的值
+     * @param $isToAll Bool 使用is_to_all为true且成功群发，会使得此次群发进入历史消息列表。
      * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
      */
-    public static function sentImageByGroup($groupId, $mediaId){
+    public static function sentImageByGroup($groupId, $mediaId, $isToAll=false){
         $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/sendall?access_token='.AccessToken::getAccessToken();
         $queryAction = 'POST';
         $template = array();
         $template['filter']['group_id'] = $groupId;
+        $template['filter']['is_to_all'] = $isToAll;
         $template['image']['media_id'] = $mediaId;
         $template['msgtype'] = 'image';
         $template = json_encode($template);
         return Curl::callWebServer($queryUrl, $template, $queryAction);
     }
-
     /**
      * 根据分组进行群发 - 发送视频消息
      *
      * @param $groupId 要发送的分组ID
      * @param $mediaId 需通过基础支持中的上传下载多媒体文件来得到。Media::upload()中返回的media_id字段的值
+     * @param $isToAll Bool 使用is_to_all为true且成功群发，会使得此次群发进入历史消息列表。
      * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
      */
-    public static function sentVideoByGroup($mediaId, $title, $description, $groupId){
+    public static function sentVideoByGroup($mediaId, $title, $description, $groupId, $isToAll=false){
         //将根据基础支持中上传多媒体得到的mediaId转化为群发视频消息所需要的mediaId。
         $queryUrl = 'https://file.api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token='.AccessToken::getAccessToken();
         $queryAction = 'POST';
@@ -136,6 +141,7 @@ class AdvancedBroadcast{
         $queryAction = 'POST';
         $template = array();
         $template['filter']['group_id'] = $groupId;
+        $template['filter']['is_to_all'] = $isToAll;
         $template['mpvideo']['media_id'] = $mediaId;
         $template['msgtype'] = 'mpvideo';
         $template = json_encode($template);
@@ -260,6 +266,125 @@ class AdvancedBroadcast{
         $queryAction = 'POST';
         $template = array();
         $template['msg_id'] = $msgId;
+        $template = json_encode($template);
+        return Curl::callWebServer($queryUrl, $template, $queryAction);
+    }
+	
+	
+	///群发消息预览，一般用于在群发前，发送到特定的账号进行消息预览，经确认后，可进行群发
+	
+	/**
+     * 预览 - 预览图文消息
+     *
+     * @param $openId String 发送消息给指定用户,该用户的OpenId
+     * @param $mediaId String 必须通过self::uploadNews获得的多媒体资源ID
+     * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
+     */
+    public static function previewNewsByGroup($openId, $mediaId){
+        $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['touser'] = $openId;
+        $template['mpnews']['media_id'] = $mediaId;
+        $template['msgtype'] = 'mpnews';
+        $template = json_encode($template);
+        return Curl::callWebServer($queryUrl, $template, $queryAction);
+    }
+    /**
+     * 预览 - 预览文本消息
+     *
+     * @param $openId String 发送消息给指定用户,该用户的OpenId
+     * @param $content 文本消息的内容
+     * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
+     */
+    public static function previewTextByGroup($openId, $content){
+        $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['touser'] = $openId;
+        $template['text']['content'] = $content;
+        $template['msgtype'] = 'text';
+        $template = json_encode($template);
+        return Curl::callWebServer($queryUrl, $template, $queryAction);
+    }
+    /**
+     * 预览 - 预览语音消息
+     *
+     * @param $openId String 发送消息给指定用户,该用户的OpenId
+     * @param $mediaId 需通过基础支持中的上传下载多媒体文件来得到。Media::upload()中返回的media_id字段的值
+     * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
+     */
+    public static function previewVoiceByGroup($openId, $mediaId){
+        $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['touser'] = $openId;
+        $template['voice']['media_id'] = $mediaId;
+        $template['msgtype'] = 'voice';
+        $template = json_encode($template);
+        return Curl::callWebServer($queryUrl, $template, $queryAction);
+    }
+    /**
+     * 预览 - 预览图片消息
+     *
+     * @param $openId String 发送消息给指定用户,该用户的OpenId
+     * @param $mediaId 需通过基础支持中的上传下载多媒体文件来得到。Media::upload()中返回的media_id字段的值
+     * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
+     */
+    public static function previewImageByGroup($openId, $mediaId){
+        $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['touser'] = $openId;
+        $template['image']['media_id'] = $mediaId;
+        $template['msgtype'] = 'image';
+        $template = json_encode($template);
+        return Curl::callWebServer($queryUrl, $template, $queryAction);
+    }
+    /**
+     * 预览 - 预览视频消息
+     *
+     * @param $openId String 发送消息给指定用户,该用户的OpenId
+     * @param $mediaId 需通过基础支持中的上传下载多媒体文件来得到。Media::upload()中返回的media_id字段的值
+     * @return mixed array("errcode"=>0, "errmsg"=>"success","msg_id"=>34182} 正常是errcode为0
+     */
+    public static function previewVideoByGroup($mediaId, $title, $description, $openId){
+        //将根据基础支持中上传多媒体得到的mediaId转化为群发视频消息所需要的mediaId。
+        $queryUrl = 'https://file.api.weixin.qq.com/cgi-bin/media/uploadvideo?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['media_id'] = $mediaId;
+        $template['title'] = $title;
+        $template['description'] = $description;
+        $template = json_encode($template);
+        $result = Curl::callWebServer($queryUrl, $template, $queryAction);
+        if(empty($result['type']) || $result['type'] != 'video' || empty($result['media_id'])){
+            return $result;
+        }
+        $mediaId = $result['media_id'];
+        //群发视频
+        $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/preview?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['touser'] = $openId;
+        $template['mpvideo']['media_id'] = $mediaId;
+        $template['msgtype'] = 'mpvideo';
+        $template = json_encode($template);
+        return Curl::callWebServer($queryUrl, $template, $queryAction);
+    }
+    /**
+     * 查询群发消息发送状态【订阅号与服务号认证后均可用】
+     *
+     * @param $msgId String 群发消息后返回的消息id
+     * @return mixed array("msg_status":"SEND_SUCCESS","msg_id"=>34182)
+     */
+    public static function getStatus($openId, $mediaId){
+        $queryUrl = 'https://api.weixin.qq.com/cgi-bin/message/mass/get?access_token='.AccessToken::getAccessToken();
+        $queryAction = 'POST';
+        $template = array();
+        $template['touser'] = $openId;
+        $template['image']['media_id'] = $mediaId;
+        $template['msgtype'] = 'image';
         $template = json_encode($template);
         return Curl::callWebServer($queryUrl, $template, $queryAction);
     }

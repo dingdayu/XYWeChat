@@ -6,6 +6,9 @@ namespace XYWeChat;
  * @Time: 2015年4月11日14:46:37
  * @Blog: http://blog.dingxiaoyu.com
  */
+
+//php调试模式
+ini_set("display_errors",1);
  
 //版本号
 define('XYWECHAT_VERSION', 'v1.0.0');

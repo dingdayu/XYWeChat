@@ -30,7 +30,11 @@ class WechatRequest{
                             $data = self::eventSubscribe($request);
                         }
                         break;
-                    //扫描二维码
+                    //取消关注
+                    case 'unsubscribe':
+                        $data = self::eventUnsubscribe($request);
+                        break;
+                    //已关注扫描二维码
                     case 'scan':
                         $data = self::eventScan($request);
                         break;
@@ -70,10 +74,7 @@ class WechatRequest{
                     case 'location_select':
                         $data = self::eventLocationSelect($request);
                         break;
-                    //取消关注
-                    case 'unsubscribe':
-                        $data = self::eventUnsubscribe($request);
-                        break;
+
                     //群发接口完成后推送的结果
                     case 'masssendjobfinish':
                         $data = self::eventMassSendJobFinish($request);
@@ -103,6 +104,10 @@ class WechatRequest{
             case 'video':
                 $data = self::video($request);
                 break;
+            //小视频
+            case 'shortvideo':
+                $data = self::shortvideo($request);
+                break;
             //位置
             case 'location':
                 $data = self::location($request);
@@ -125,7 +130,7 @@ class WechatRequest{
      * @return array
      */
     public static function text(&$request){
-        $content = '收到文本消息';
+        $content = '收到文本消息：'.$request['content'];
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 
@@ -135,8 +140,11 @@ class WechatRequest{
      * @return array
      */
     public static function image(&$request){
-        $content = '收到图片';
-        return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
+        $content = "收到图片消息（{$request['msgid']}）\n媒体id：{$request['mediaid']}\r\n图片链接：{$request['picurl']}";
+        //先用 客服消息发送文本信息
+        ResponseInitiative::text( $request['fromusername'], $content);
+        return ResponsePassive::image($request['fromusername'], $request['tousername'], $request['mediaid']);
+
     }
 
     /**
@@ -146,12 +154,13 @@ class WechatRequest{
      */
     public static function voice(&$request){
         if(!isset($request['recognition'])){
-            $content = '收到语音';
-            return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
+            $content = '收到语音消息（'.$request['msgid'].'）媒体id：'.$request['mediaid'] .'\n语音格式：'.$request['format'];
+
         }else{
-            $content = '收到语音识别消息，语音识别结果为：'.$request['recognition'];
-            return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
+            $content =  '收到语音消息（'.$request['msgid'].'）媒体id：'.$request['mediaid'] ."\r\n语音格式：".$request['format']."\n语音识别结果为：".$request['recognition'];
         }
+        ResponseInitiative::text( $request['fromusername'], $content);
+        return ResponsePassive::voice($request['fromusername'], $request['tousername'], $request['mediaid']);
     }
 
     /**
@@ -160,8 +169,22 @@ class WechatRequest{
      * @return array
      */
     public static function video(&$request){
-        $content = '收到视频';
-        return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
+        $content = '收到视频（'.$request['msgid'].'）媒体id：'.$request['mediaid'] ;
+
+        ResponseInitiative::text( $request['fromusername'], $content);
+        return ResponsePassive::video($request['fromusername'], $request['tousername'], $request['mediaid'],'收到视频消息','这是刚才您发送的视频消息');
+    }
+
+    /**
+     * @descrpition 视频
+     * @param $request
+     * @return array
+     */
+    public static function shortvideo(&$request){
+        $content = '收到小视频（'.$request['msgid'].'）媒体id：'.$request['mediaid'] ;
+
+        ResponseInitiative::text( $request['fromusername'], $content);
+        return ResponsePassive::video($request['fromusername'], $request['tousername'], $request['mediaid'],'收到小视频消息','这是刚才您发送的小视频消息');
     }
 
     /**
@@ -170,7 +193,7 @@ class WechatRequest{
      * @return array
      */
     public static function location(&$request){
-        $content = '收到上报的地理位置';
+        $content = '收到上报的地理位置（'.$request['msgid'].'）:'.$request['label'].'\r\n经度：'.$request['location_x'].'\r\n纬度：'.$request['location_y'].'';
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 
@@ -180,7 +203,16 @@ class WechatRequest{
      * @return array
      */
     public static function link(&$request){
-        $content = '收到连接';
+        $content = '收到连接（'.$request['msgid'].'）:已回复图文消息，请查看。';
+
+		$item = array(
+            'title'=>$request['title'].$request['msgid'],
+            'description'=>$request['description'],
+            'url'=>'http://c.hiphotos.baidu.com/zhidao/wh%3D600%2C800/sign=955679078b82b9013df8cb3543bd854f/71cf3bc79f3df8dc8baaddb1cc11728b4710287e.jpg',
+            'picurl'=>$request['url'],
+        );
+
+		ResponseInitiative::news( $request['fromusername'], array($item));
         return ResponsePassive::text($request['fromusername'], $request['tousername'], $content);
     }
 

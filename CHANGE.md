@@ -47,3 +47,11 @@
  - [新增方法] `XYWeChat\ShakeAround\User` 添加 获取摇周边的设备及用户信息 `getShakeInfo()`
  - [新增类] `XYWeChat\Statistics` 添加 数据统计 `Statistics`(statistics.class.php)
  - [新增方法] `XYWeChat\ShakeAround\Statistics` 添加 以设备为维度的数据统计接口 `device()` ,以页面为维度的数据统计接口 `page()`
+
+>2015年5月2日16:42:35
+
+ - [新增消息类型] `XYWeChat\WechatRequest` 新增小视屏消息类型
+ - [修复] 修复客服消息中的中文编码问题
+ - [新增] 高级群发接口，新增预览
+ - [新增] 根据分组群发 新增参数is_to_all，使用is_to_all为true且成功群发，会使得此次群发进入历史消息列表。
+ - [新增] 新增 客服帐号管理-获取所有客服账号列表/添加客服账号/修改客服账号/删除客服账号/设置客服头像
