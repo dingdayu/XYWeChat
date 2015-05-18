@@ -128,7 +128,7 @@ class Menu{
     }
 
     /**
-     * 获取微信菜单
+     * 删除微信菜单
      * @return bool|mixed
      *
      * 成功返回：{"errcode":0,"errmsg":"ok"}
