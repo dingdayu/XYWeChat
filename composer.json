@@ -1,0 +1,46 @@
+{
+    "name": "dingdayu/wechat",
+    "description": "一个简单的微信开发SDK",
+    "version": "0.1.1",
+    "time": "2015-12-18",
+    "type": "library",
+    "keywords": ["wechat","weixin","SDK"],
+    "homepage": "http://wechat.dingxiaoyu.com/",
+    "license": "Apache2",
+    "authors": [
+        {
+            "name": "dingdayu",
+            "email": "614422099@qq.com",
+            "homepage": "http://dingxiaoyu.com/",
+            "role": "developer"
+        }
+    ],
+    "support": "614422099@qq.com",
+    "minimum-stability" : "dev",
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "johnkary/phpunit-speedtrap": "^1.0",
+        "mikey179/vfsStream": "~1.6",
+        "phploc/phploc": "*",
+        "phpunit/phpunit": "~4.8",
+        "sebastian/phpcpd": "*",
+        "squizlabs/php_codesniffer": "2.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "XYser\\Wechat\\": "src/Wechat/",
+            "XYser\\Utils\\": "src/Utils/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packagist.phpcomposer.com"
+        },
+        {
+            "packagist": false
+        }
+    ]
+}
